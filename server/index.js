@@ -27,6 +27,8 @@ socketIO.on('connection', (socket) => {
         socketIO.emit('newUserResponse', users);
     });
 
+    socket.on('typing', (data) => socket.broadcast.emit('typingResponse', data));
+
     socket.on('disconnect', () => {
         console.log('🔥: A user disconnected');
         users = users.filter((user) => user.socketID != socket.id);
